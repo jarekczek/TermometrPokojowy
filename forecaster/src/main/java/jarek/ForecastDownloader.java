@@ -22,7 +22,7 @@ public class ForecastDownloader {
   private void go(String[] args) throws Exception {
     String forecast = getInfoFromInternet(args[0]);
     System.out.println("prognoza: " + forecast);
-    SimpleDateFormat df = new SimpleDateFormat("YYYYMMdd");
+    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
     File outDir = new File("weather_data");
     outDir.mkdir();
     File outFile = new File(outDir, df.format(Calendar.getInstance().getTime()) + ".txt");
@@ -50,6 +50,8 @@ public class ForecastDownloader {
       String czynnikResult = czynnik.nextElementSibling().text();
       czynnikResult = czynnikResult.replace("[NESW]+ przy ", "");
       czynnikResult = czynnikResult.replace(" °C", "C");
+      czynnikResult = czynnikResult.replace(" ", "");
+      czynnikResult = czynnikResult.replace("°", "");
       if (result.length() > 0)
         result.append(", ");
       result.append(czynnikResult);

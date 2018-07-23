@@ -11,13 +11,17 @@ repositories {
 }
 
 dependencies {
-    compile 'org.jsoup:jsoup:1.11.3'
+    compile 'org.jsoup:jsoup:1.10.3'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "utf-8"
 }
 
 task run (type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'jarek.MsgServer'
+    main = 'jarek.ForecastDownloader'
     //jvmArgs(["-Dhttp.proxyHost=localhost", "-Dhttp.proxyPort=1090"])
     //jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7778"
 }
@@ -29,7 +33,8 @@ jar { // java plugin
                 "Main-Class": tasks.run.main,
                 // classpath jar
                 "Class-Path": configurations.compile.files.collect {
-                    "file:///" + it.toString()
+                    //"file:///" + it.toString()
+                    it.name
                 }.join(" ")
         )
     }
