@@ -48,10 +48,7 @@ public class ForecastDownloader {
       if (!nazwaOk)
         continue;
       String czynnikResult = czynnik.nextElementSibling().text();
-      czynnikResult = czynnikResult.replace("[NESW]+ przy ", "");
-      czynnikResult = czynnikResult.replace(" °C", "C");
-      czynnikResult = czynnikResult.replace(" ", "");
-      czynnikResult = czynnikResult.replace("°", "");
+      czynnikResult = czynnikResult.replace(" ", ""); // Kind of invisible space, for older jsoup.
       if (result.length() > 0)
         result.append(", ");
       result.append(czynnikResult);
