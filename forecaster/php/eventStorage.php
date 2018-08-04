@@ -71,6 +71,16 @@ class eventStorage {
     }
     return $lastEvent;
   }
+
+  function waitForAnyEvent() {
+    $lastMod = filemtime($this->fileName);
+    usleep(300*1000);
+    clearstatcache();
+    while ($lastMod === filemtime($this->fileName)) {
+      usleep(300*1000);
+      clearstatcache();
+    }
+  }
 }
 
 function validateCode($code) {

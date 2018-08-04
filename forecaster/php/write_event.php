@@ -5,7 +5,7 @@ require_once('eventStorage.php');
 
 if ($GLOBALS['_SERVER']['COMPUTERNAME'] == 'LENOVO8G') {
   $code = 'aaa';
-  $data = 'zzz';
+  $data = 'cccc';
 } else {
   $code = $_GET['code'];
   $data = $_GET['data'];
