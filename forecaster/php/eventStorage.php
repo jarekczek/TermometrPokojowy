@@ -28,13 +28,25 @@ class eventStorage {
 
   function readLastForDate($date) {
     $filename = $this->weatherDataDir . $date->format("Ymd") . ".txt";
-    $event = NULL;
+    $result = NULL;
+
+    set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {});
+    $f = fopen($this->fileName, "r");
+    if ($f === false)
+      $result = '';
+    restore_error_handler();
+
+    set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
+        // error was suppressed with the @-operator
+        if (0 === error_reporting()) {
+            return false;
+        }
+
+        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+    });
 
     try {
-      $f = fopen($this->fileName, "r");
-      if ($f === false)
-        return NULL;
-      while (true) {
+      while ($result === NULL) {
         $line = fgets($f);
         if ($line === FALSE)
           break;
@@ -45,8 +57,9 @@ class eventStorage {
       }
       fclose($f);
     } catch (Exception $e) {
-      return "error";
+      $result = "error";
     }
+    restore_error_handler();
     return $event;
   }
 
