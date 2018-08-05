@@ -23,9 +23,9 @@ public class ForecastDownloader {
     String forecast = getInfoFromInternet(args[0]);
     System.out.println("prognoza: " + forecast);
     SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-    File outDir = new File("weather_data");
+    File outDir = new File("/home/bonsoft/domains/jarek.katowice.pl/data/events");
     outDir.mkdir();
-    File outFile = new File(outDir, df.format(Calendar.getInstance().getTime()) + ".txt");
+    File outFile = new File(outDir, "weather_" + df.format(Calendar.getInstance().getTime()) + ".events");
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile, true), "UTF-8"));
     bw.write(forecast + "\n");
     bw.write("\n");
