@@ -24,12 +24,33 @@ public class ForecastDownloader {
     System.out.println("prognoza: " + forecast);
     SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
     File outDir = new File("/home/bonsoft/domains/jarek.katowice.pl/data/events");
+    if (System.getenv("LOCAL_TEST") != null)
+      outDir = new File("c:/temp/1/events");
     outDir.mkdir();
     File outFile = new File(outDir, "weather_" + df.format(Calendar.getInstance().getTime()) + ".events");
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile, true), "UTF-8"));
     bw.write(forecast + "\n");
     bw.write("\n");
     bw.close();
+    uploadForecast(forecast);
+  }
+
+  private String encodeUrl(String s) {
+    return s
+      .replace(" ", "%20")
+      .replace("/", "%2F")
+      .replace("°", "");
+  }
+
+  private void uploadForecast(String data) {
+    try {
+      URL url = new URL("https://eventserver75.herokuapp.com/events/write?code=weather&data="
+        + encodeUrl(data));
+      url.openConnection().getInputStream().close();
+      System.out.println(encodeUrl(data));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   private String getInfoFromInternet(String urlString) throws Exception {

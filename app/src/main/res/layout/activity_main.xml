@@ -16,14 +16,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <EditText
+            android:id="@+id/weather"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="auto"
+            android:foregroundGravity="right"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="none"
+            android:padding="10sp"
+            android:text="weather"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/time"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1.00b"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+            android:text="1.01"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/motion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MotionState"
+            app:layout_constraintTop_toBottomOf="@+id/version" />
+
+        <TextView
+            android:id="@+id/updateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="never"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/version" />
 
         <EditText
             android:id="@+id/time"
@@ -44,6 +77,17 @@
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/msg1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8" />
     </android.support.constraint.ConstraintLayout>
 
     <FrameLayout
@@ -71,13 +115,13 @@
                 android:text="@string/finish_button" />
 
             <Button
-                android:id="@+id/dummy_button"
+                android:id="@+id/status_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="dummyAction"
-                android:text="@string/dummy_button" />
+                android:onClick="statusAction"
+                android:text="Status Button" />
 
         </LinearLayout>
     </FrameLayout>
